@@ -1,0 +1,610 @@
+{% extends 'body.html' %}
+
+{% block body %}
+<style>
+  body{
+    background: black;
+    overflow: hidden;
+  }
+  body::-webkit-scrollbar { 
+	display: none;
+}
+  .background {
+  position: relative;
+  width: 50px;
+  height: 150px;
+}
+.eva {
+  position: absolute;
+  left: 10%;
+  animation: floor 3s infinite;
+}
+@keyframes floor {
+  0%{
+    top: 20%;
+  }
+  50%{
+    top: 30%;
+  }
+  100%{
+    top: 20%;
+  }
+}
+@keyframes floor2 {
+  0%{
+    top: 10%;
+  }
+  50%{
+    top: 20%;
+  }
+  100%{
+    top: 10%;
+  }
+}
+
+.cabec {
+  z-index: 1;
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 120px;
+  height: 92px;
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  background: linear-gradient(45deg, #eee, #fff, #fff 90%);
+  animation: head 3s infinite;
+}
+.rosto {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  width: 100px;
+  height: 60px;
+  border-top-left-radius: 4.5rem;
+  border-top-right-radius: 4.5rem;
+  border-bottom-left-radius: 1.7rem;
+  border-bottom-right-radius: 1.7rem;
+  background: #313131;
+  animation: olhar 3s infinite;
+}
+@keyframes olhar {
+  0%{
+    left: 10px;
+  }
+  50%{
+    left: 14px;
+  }
+  100%{
+    left: 10px;
+  }
+}
+
+.eye {
+  width: 32px;
+  height: 18px;
+  background: #3ee47e00;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px #3ee47e;
+  animation: carregamento 2s infinite;
+}
+
+.eye-left{
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  transform: rotate(16deg);
+  background-color: #3ee47e;
+}
+
+@keyframes eyeLeft {
+  0%{
+    height: 18px;
+    top: 20px;
+    transform: rotate(16deg);
+  }
+  10%{
+    height: 1px;
+    top: 30px;
+    transform: rotate(5deg);
+  }
+  100%{
+    height: 18px;
+    top: 20px;
+    transform: rotate(16deg);
+  }
+}
+.eye-right {
+  position: absolute;
+  top: 20px;
+  left: 56px;
+  background-color: #3ee47e;
+  transform: rotate(-16deg);
+}
+@keyframes eyeRight {
+  0%{
+    height: 18px;
+    top: 20px;
+    transform: rotate(-16deg);
+  }
+  10%{
+    height: 1px;
+    top: 30px;
+    transform: rotate(-5deg);
+  }
+  100%{
+    height: 18px;
+    top: 20px;
+    transform: rotate(-16deg);
+  }
+  
+}
+
+.corpo {
+  position: absolute;
+  top: 95px;
+  left: 15px;
+  width: 100px;
+  height: 140px;
+  border-radius: 100%;
+  background: linear-gradient(45deg, #eee, #fff, #fff 85%);
+}
+.corpo::before {
+  position: absolute;
+  width: 100px;
+  height: 85px;
+  background: #fff;
+  border-radius: 10%;
+  content:"";
+}
+.arm {
+  width: 30px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #eee, #fff, #fff 50%);
+}
+.arm-right {
+  position: absolute;
+  left: 99%;
+  top: 0;
+  transform: rotate(-16deg);
+}
+.arm-left {
+  position: absolute;
+  left: -29%;
+  top: 0;
+  transform: rotate(16deg);
+}
+.sombraFace {
+  position: absolute;
+  top: -18.5px;
+  left: 9%;
+  width: 80px;
+  height: 10px;
+  background: #313131;
+  border-radius: 100%;
+  z-index: 100;
+  animation: olharSombra 3s infinite;
+}
+@keyframes olharSombra {
+  0%{
+    left: 9%;
+  }
+  50%{
+    left: 12%;
+  }
+  100%{
+    left: 9%;
+  }
+}
+
+.sombra {
+  position: absolute;
+  top: -3px;
+  left: 6.5%;
+  width: 90px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.562);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+.shadowEye{
+  position: absolute;
+  top: 4.6rem;
+  left: -4%;
+  width: 5px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.486);
+  border-top-left-radius: 20%;
+  border-bottom-left-radius: 70%;
+  opacity: 0.1;
+}
+.shadowEye2{
+  position: absolute;
+  top: 4.6rem;
+  left: 99%;
+  width: 5px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.486);
+  border-top-right-radius: 20%;
+  border-bottom-right-radius: 70%;
+  opacity: 0.1;
+}
+.simbol{
+  position: absolute;
+  top: 1.3rem;
+  left: 71%;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 100%;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.on{
+  border: 2px solid #3ee47e;
+  box-shadow: 0px 0px 10px #3ee47e;
+}
+.off{
+  border: 2px solid #e43e3e;
+  box-shadow: 0px 0px 10px #e43e3e;
+}
+.detail{
+  position: absolute;
+  top: 0.3rem;
+  left: 45%;
+  width: 3px;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.486);
+  border-top-right-radius: 20%;
+  border-bottom-right-radius: 70%;
+  opacity: 0.1;
+  transform: rotate(20deg);
+}
+.detail2{
+  position: absolute;
+  top: 4.9rem;
+  left: 34%;
+  width: 3px;
+  height: 13px;
+  background: rgba(0, 0, 0, 0.486);
+  border-top-right-radius: 20%;
+  border-bottom-right-radius: 70%;
+  opacity: 0.1;
+  transform: rotate(-20deg);
+}
+.detail3{
+  position: absolute;
+  top: 5.5rem;
+  left: 31%;
+  width: 3px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.486);
+  border-top-right-radius: 20%;
+  border-bottom-right-radius: 70%;
+  opacity: 0.1;
+  transform: rotate(20deg);
+}
+
+#modalBody{
+  height: calc(100vh - 50vh);
+  overflow: scroll;
+}
+#modalBody::-webkit-scrollbar { 
+	display: none;
+}
+.modal-sheet{
+  z-index: -1;
+}
+.modal-dialog{
+  overflow:auto;
+}
+.toast:not(.show) {
+      display: block;
+    }
+
+    .mesageUser{
+      width: 60%;
+      margin-left: 40%;
+    }
+    .mesageEva{
+      width: 60%;
+      margin-right: 50%;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    #mensagem:focus{
+      box-shadow: none;
+    }
+    #status{
+      color: #313131;
+      font-size: 14px;
+      padding-left: 10px;
+    }
+    code{
+      background-color: #eee;
+    border-radius: 3px;
+    }
+    #sppiner{
+      margin-left: 35%;
+      margin-top: 15%;
+    }
+    .badge{
+      top: -1.5rem;
+      right: 0.3rem;
+    }
+</style>
+<div class="background">
+  <div class="eva">
+    <div class="cabec">
+      <div class="rosto">
+        <div class="eye eye-left"></div>
+        <div class="eye eye-right"></div>
+        <div class="spinner-border text-success" role="status" id="sppiner" hidden>
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="shadowEye"></div>
+        <div class="shadowEye2"></div>
+      </div>
+    </div>
+    <div class="corpo">
+      <div class="sombra"></div>
+      <div class="sombraFace"></div>
+      <div class="simbol on" id="onOff" onclick="onOff()">
+      </div>
+      <div class="detail"></div>
+      <div class="detail2"></div>
+      <div class="detail3"></div>
+      <div class="arm arm-left"></div>
+      <div class="arm arm-right"></div>
+    </div>
+  </div>
+</div>
+<div class="modal modal-sheet d-block bg-dark p-4 py-md-5" id="modalSheet">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header border-bottom-0">
+        <h1 class="modal-title fs-5">Evabot <span id="status"></span></h1>
+
+      </div>
+      <div class="modal-body py-0" id="modalBody">
+        
+      </div>
+      <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+        <div class="input-group mb-3">
+          <input type="text" placeholder="Mensagem" id="mensagem" autocomplete="off" class="form-control">
+          <span id="btnGravar" onclick="start1()" class="position-absolute btn btn-dark translate-middle badge rounded-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-mute-fill" viewBox="0 0 16 16">
+              <path d="M13 8c0 .564-.094 1.107-.266 1.613l-.814-.814A4.02 4.02 0 0 0 12 8V7a.5.5 0 0 1 1 0v1zm-5 4c.818 0 1.578-.245 2.212-.667l.718.719a4.973 4.973 0 0 1-2.43.923V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 1 0v1a4 4 0 0 0 4 4zm3-9v4.879L5.158 2.037A3.001 3.001 0 0 1 11 3z"/>
+              <path d="M9.486 10.607 5 6.12V8a3 3 0 0 0 4.486 2.607zm-7.84-9.253 12 12 .708-.708-12-12-.708.708z"/>
+            </svg>
+          </span>
+          <span class="input-group-text btn btn-dark" onclick="enviar()" id="enviar">enviar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let textarea = document.querySelector("#mensagem")
+
+class speechApi {
+
+  constructor() {
+
+    const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition
+
+    this.speechApi = new SpeechToText()
+    this.output = textarea.output 
+    this.speechApi.continuous = true
+    this.speechApi.lang = "pt-BR"
+
+    
+    this.speechApi.onresult = (e) => {
+      var resultIndex = e.resultIndex
+      var transcript = e.results[resultIndex][0].transcript
+      goVoz(transcript, textarea)
+    }
+  }
+
+  start() {
+    this.speechApi.start()
+  }
+
+  stop() {
+    this.speechApi.stop()
+  }
+}
+
+  var speech = new speechApi()
+
+  function start1() {
+    let btnGravar = $('#btnGravar')
+    btnGravar.attr('onclick', 'stop1()');
+    btnGravar.html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">'+
+              '<path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>'+
+              '<path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>'+
+            '</svg>')
+    speech.start()
+  }
+
+  function stop1() {
+    let btnGravar = $('#btnGravar')
+    btnGravar.attr('onclick', 'start1()');
+    btnGravar.html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-mute-fill" viewBox="0 0 16 16">'+
+  '<path d="M13 8c0 .564-.094 1.107-.266 1.613l-.814-.814A4.02 4.02 0 0 0 12 8V7a.5.5 0 0 1 1 0v1zm-5 4c.818 0 1.578-.245 2.212-.667l.718.719a4.973 4.973 0 0 1-2.43.923V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 1 0v1a4 4 0 0 0 4 4zm3-9v4.879L5.158 2.037A3.001 3.001 0 0 1 11 3z"/>'+
+  '<path d="M9.486 10.607 5 6.12V8a3 3 0 0 0 4.486 2.607zm-7.84-9.253 12 12 .708-.708-12-12-.708.708z"/>'+
+'</svg>')
+    speech.stop()
+  }
+
+  function goVoz(transcript, textarea){
+    if(transcript.indexOf('deletar o que eu disse') > -1){
+        textarea.value = ""
+      }else if(transcript.indexOf('desativar microfone') > -1 || transcript.indexOf('Desativar microfone') > -1){
+        stop1()
+      }else if(transcript.indexOf('enviar mensagem') > -1 || transcript.indexOf('Enviar mensagem') > -1 || transcript.indexOf('Enviar') > -1 || transcript.indexOf('enviar') > -1){
+        enviar()
+      }else if(transcript.indexOf('atualizar página') > -1 || transcript.indexOf('Atualizar página') > -1 || transcript.indexOf('Recarregar página') > -1 || transcript.indexOf('recarregar página') > -1 || transcript.indexOf('atualizar') > -1){
+        location.reload()
+      }else if(transcript.indexOf('Parar voz') > -1 || transcript.indexOf('parar voz') > -1 || transcript.indexOf('parar a voz') > -1 ||  transcript.indexOf('Parar a voz') > -1){
+        lerTexto('', true)
+      }
+      else{
+        textarea.value += transcript
+      }
+  }
+
+
+  function lerTexto(texto, cancel){
+    var mensagem = new SpeechSynthesisUtterance();
+    var vozes = speechSynthesis.getVoices();
+    mensagem.text = texto;
+    mensagem.voice = vozes[4]; 
+    mensagem.lang = "pt-BR";
+    mensagem.volume = 1; 
+    mensagem.rate = 2; 
+    mensagem.pitch = 0; 
+    if(document.querySelector('.simbol').classList == 'simbol on'){
+      speechSynthesis.speak(mensagem);
+    }
+    if(cancel == true){
+     speechSynthesis.cancel();
+    }
+}
+
+function onOff(){
+  let simbol = document.querySelector('.simbol')
+  if(simbol.classList == 'simbol on'){
+    simbol.classList = 'simbol off'
+    lerTexto('', true)
+  }else{
+    simbol.classList = 'simbol on'
+  }
+}
+
+
+  function enviar(){
+      $(document).ready(function (){
+      var busca = $('#mensagem').val();
+      if(busca != ''){
+        $('#mensagem').val('')
+
+$('#modalBody').append('<div class="toast mesageUser">'+
+  '<div class="toast-header">'+
+    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle rounded me-2" viewBox="0 0 16 16">'+
+    '<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>'+
+    '<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>'+
+  '</svg>'+
+    '<strong class="me-auto">Você</strong>'+
+    '<small>' + new Date().getHours().toString().padStart(2, '0') + ':' + new Date().getMinutes().toString().padStart(2, '0')
++'</small>'+
+  '</div>'+
+  '<div class="toast-body">'+
+    busca 
+  +'</div>'+
+'</div>')
+descerscroll()
+
+if(busca.length > 0){
+
+  document.querySelector('.eye-left').hidden = true
+  document.querySelector('.eye-right').hidden = true
+  document.getElementById('sppiner').hidden = false
+
+
+  $('#modalBody').append('<div class="toast mesageEva" id="carregamento">'+
+            '<div class="toast-header">'+
+              '<img src="../site/img/2023-05-28 (2).png" width="20" height="20" class="rounded me-2" alt="...">'+
+              '<strong class="me-auto">Evabot</strong>'+
+            '</div>'+
+            '<div class="toast-body">'+
+              '<img src="../site/img/icons8-pontos.gif" width="30" height="30" alt="">'+
+            '</div>'+
+          '</div>')
+          descerscroll()
+    $.ajax({
+        url: "{{ url('chatGpt/') }}",
+        method: 'POST',
+        data: {
+            'mensagem': busca   
+        },
+        success: function (data) {
+          let mensageEvaBot
+          if(data != ''){
+            mensageEvaBot = data.replace('Eu:', '').replace('(a)', '').replace('/a', '').replace('Assistente:', '')
+          }else{
+            mensageEvaBot = 'Desculpe, Aconteceu um erro temporário.'
+          }
+
+          $('#modalBody').append('<div class="toast mesageEva">'+
+            '<div class="toast-header">'+
+              '<img src="../site/img/2023-05-28 (2).png" width="20" height="20" class="rounded me-2" alt="...">'+
+              '<strong class="me-auto">Evabot</strong>'+
+              '<small>' + new Date().getHours().toString().padStart(2, '0') + ':' + new Date().getMinutes().toString().padStart(2, '0')
++'</small>'+
+            '</div>'+
+            '<div class="toast-body">'+
+              mensageEvaBot 
+            +'</div>'+
+          '</div>')
+          descerscroll()
+
+          document.querySelector('.eye-left').hidden = false
+          document.querySelector('.eye-right').hidden = false
+          document.getElementById('sppiner').hidden = true
+
+          
+          let element = document.getElementById('carregamento')
+          element.parentNode.removeChild(element)
+
+          if($('#btnGravar').attr('onclick') == 'stop1()'){
+            lerTexto(mensageEvaBot)
+          }
+        }
+    })
+}
+      }
+      })
+    }
+
+
+function descerscroll(){
+  $("#modalBody").scrollTop($("#modalBody")[0].scrollHeight)
+}
+
+function tamanhoTela(){
+  let largura = window.screen.width
+  let altura = window.screen.height
+
+  if(largura <= 500){
+    document.querySelector('.eva').style.animation = 'floor2 3s infinite'
+    document.querySelector('.modal-dialog').style.position = 'fixed'
+    document.querySelector('.modal-dialog').style.marginTop = '5rem'
+  }else{
+    document.querySelector('.eva').style.animation = 'floor 3s infinite'
+    document.querySelector('.modal-dialog').style.position = ''
+    document.querySelector('.modal-dialog').style.marginTop = ''
+  }
+
+  if(altura <= 500){
+    document.querySelector('.aviso').hidden = false
+  }else{
+    document.querySelector('.aviso').hidden = true
+  }
+}
+
+setInterval(() => {
+  tamanhoTela()
+}, 1000);
+
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        enviar()
+    }
+});
+
+</script>
+{% endblock %}

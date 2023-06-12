@@ -1,0 +1,103 @@
+        <html lang="pt-br">
+          <head>
+        
+              <meta charset="UTF-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Cadastro - EvaBot</title>
+        
+            <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+            
+            <!-- Custom styles for this template -->
+            <link href="../site/css/login.css" rel="stylesheet">
+          </head>
+
+          <body class="text-center">
+        
+        <main class="form-signin w-100 m-auto">
+          <form action="{{ url('goCadastro/') }}"  name="cad-usuario" class="needs-validation" >
+            <h1 class="h3 mb-3 fw-normal">Cadastre-se na EvaBot</h1>
+        
+            <div class="form-floating">
+              <input type="text" class="form-control usuario" name="usuario" id="usuario" placeholder="Nome de usuário" required>
+              <label for="floatingInput">Nome de usuário</label>
+              <div class="invalid-feedback">
+                Por favor informe seu nome  usuário.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input type="email" class="form-control email" name="email" id="emailinput" placeholder="Seu melhor e-mail" required>
+              <label for="floatingPassword">Melhor email</label>
+              <div class="invalid-feedback">
+                Por favor informe um email válido.
+              </div>
+            </div>
+
+            <script>
+              "{% if aviso == 'email_invalid' %}"
+               document.querySelector('.email').classList += ' is-invalid'
+              "{% endif %}"
+            </script>
+
+            <div class="form-floating">
+              <input type="number" class="form-control" name="idade" id="idade" placeholder="Sua idade" required>
+              <label for="floatingPassword">Idade</label>
+              <div class="invalid-feedback" id="feedbackIdade">
+                Por favor informe sua idade.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control senha_usuario" name="senha" id="senha_usuario" onkeyup="validarSenhaForca()" placeholder="Crie uma senha" required>
+              <label for="senha_usuario">Crie uma senha</label>
+              <img src="https://img.icons8.com/fluency-systems-regular/20/000000/visible.png" class="olho" id="olho"/>
+              <div class="invalid-feedback">
+                Por favor crie uma senha para sua conta.
+              </div>
+            </div>
+            <div class="form-group row validacao">
+              <label class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-5">
+                  <div id="erroSenhaForca" style="width: 15rem;"></div>
+              </div>
+          </div>
+        </div><br><br>
+        
+            <button class="w-100 btn btn-lg btn-violet" type="submit" id="entrar" onclick="entrar()" type="submit" value="Cadastrar" name="CadUsuario">Cadastrar</button>
+            <small class="text-muted">Ao clicar em Cadastrar, você concorda com os <a href="{{ url('termos/') }}">termos de uso</a>.</small>
+          </form>
+
+          <hr class="my-4">
+          <p>Já tem uma conta? <a href="{{ url('validation/') }}">Entrar</a></p>
+               
+          <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
+        </main>
+        
+        <script>
+          document.getElementById('olho').addEventListener('mousedown', function() {
+            document.getElementById('senha_usuario').type = 'text';
+          });
+          
+          document.getElementById('olho').addEventListener('mouseup', function() {
+            document.getElementById('senha_usuario').type = 'password';
+          });
+          
+          // Para que o password não fique exposto apos mover a imagem.
+          document.getElementById('olho').addEventListener('mousemove', function() {
+            document.getElementById('senha_usuario').type = 'password';
+          });
+          
+          document.getElementById('idade').addEventListener('keyup', () => {
+            let inputIdade = document.getElementById('idade')
+            if(Number(inputIdade.value) < 18){
+              inputIdade.classList += ' is-invalid'
+              feedbackIdade.innerHTML = 'Você deve ser um adulto para usar corretamente a Evabot.'
+            }else{
+              inputIdade.classList = 'form-control'
+            }
+          })
+          
+          </script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        </body></html>
